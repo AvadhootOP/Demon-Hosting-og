@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demon Hosting - Minecraft Hosting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0e0e0e;
+      color: #fff;
+    }
+    header {
+      background: #1a1a1a;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 0 20px #111;
+    }
+    header img {
+      width: 100px;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin: 10px 0 5px;
+    }
+    header p {
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 20px 0;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #ffcc00;
+      transition: width 0.3s;
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    .services, .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255,255,255,0.05);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: #ffcc00;
+    }
+    .checkout {
+      text-align: center;
+    }
+    .qr {
+      max-width: 200px;
+      margin: 20px auto;
+    }
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 20px;
+      color: #777;
+    }
+    .button {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 10px;
+      background: #ffcc00;
+      color: #000;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    #upi-section {
+      background: #1c1c1c;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+    #upi-section code {
+      background: #333;
+      padding: 5px 10px;
+      border-radius: 5px;
+      color: #ffcc00;
+    }
+  </style>
+  <script>
+    function selectPlan(price, planName) {
+      document.getElementById('amount').innerText = price;
+      document.getElementById('upi-plan-name').innerText = planName;
+    }
+    async function notifyDiscord(planName, amount) {
+      await fetch('https://discord.com/api/webhooks/1384076241912463443/U80MH2WjPXZG32uJ31axtrNMa0h_kIljdcbzaYH2JlZ0n4q3g-_NsTJ-_EFS6X2pOghC', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: `✅ New Purchase Request: ${planName} for ₹${amount}` })
+      });
+    }
+    function proceedPayment() {
+      const planName = document.getElementById('upi-plan-name').innerText;
+      const amount = document.getElementById('amount').innerText;
+      alert(`Please pay ₹${amount} via UPI: avadhutrairikar@fam`);
+      notifyDiscord(planName, amount);
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <img src="demon-hosting-logo.jpg" alt="Demon Hosting Logo">
+    <h1>Demon Hosting</h1>
+    <p>Fast. Secure. Affordable.</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#plans">View Plans</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="about">
+    <h2>About Us</h2>
+    <p>Welcome to Demon Hosting! We provide blazing fast and affordable Minecraft and VPS hosting solutions. Whether you're running a server for friends or building a large community, we’ve got your back with top-notch uptime and performance.</p>
+  </section>
+
+  <section id="services">
+    <h2>Our Services</h2>
+    <div class="services">
+      <div class="card">
+        <h3>Minecraft Hosting</h3>
+        <p>Lag-free, high-performance Minecraft servers tailored to your needs.</p>
+      </div>
+      <div class="card">
+        <h3>VPS Hosting</h3>
+        <p>Powerful VPS plans with root access and full control.</p>
+      </div>
+      <div class="card">
+        <h3>More Coming Soon!</h3>
+        <p>We are always expanding and improving to offer you more.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="plans">
+    <h2>Choose Your Plan</h2>
+    <div class="plans">
+      <div class="card">
+        <h3>Starter Plan</h3>
+        <p>RAM: 4 GB<br>Disk: 20 GB<br>CPU: 100%<br>Price: ₹180/month</p>
+        <a class="button" href="#checkout" onclick="selectPlan(180, 'Starter Plan')">Buy Now</a>
+      </div>
+      <div class="card">
+        <h3>Basic Plan</h3>
+        <p>RAM: 6 GB<br>Disk: 30 GB<br>CPU: 200%<br>Price: ₹280/month</p>
+        <a class="button" href="#checkout" onclick="selectPlan(280, 'Basic Plan')">Buy Now</a>
+      </div>
+      <div class="card">
+        <h3>Standard Plan</h3>
+        <p>RAM: 8 GB<br>Disk: 40 GB<br>CPU: 300%<br>Price: ₹450/month</p>
+        <a class="button" href="#checkout" onclick="selectPlan(450, 'Standard Plan')">Buy Now</a>
+      </div>
+      <div class="card">
+        <h3>Pro Plan</h3>
+        <p>RAM: 16 GB<br>Disk: 60 GB<br>CPU: 500%<br>Price: ₹1000/month</p>
+        <a class="button" href="#checkout" onclick="selectPlan(1000, 'Pro Plan')">Buy Now</a>
+      </div>
+      <div class="card">
+        <h3>Elite Plan</h3>
+        <p>RAM: 24 GB<br>Disk: 80 GB<br>CPU: 700%<br>Price: ₹1500/month</p>
+        <a class="button" href="#checkout" onclick="selectPlan(1500, 'Elite Plan')">Buy Now</a>
+      </div>
+      <div class="card">
+        <h3>Ultra Plan</h3>
+        <p>RAM: 32 GB<br>Disk: 100 GB<br>CPU: 1000%<br>Price: ₹2000/month</p>
+        <a class="button" href="#checkout" onclick="selectPlan(2000, 'Ultra Plan')">Buy Now</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="checkout" class="checkout">
+    <h2>Checkout</h2>
+    <p>Selected Plan: <strong id="upi-plan-name">None</strong></p>
+    <p>Total: <strong>₹<span id="amount">0</span></strong></p>
+    <div id="upi-section">
+      <p>Scan & Pay UPI QR (or use UPI ID: <code>avadhutrairikar@fam</code>)</p>
+      <img class="qr" src="your-qr-code.png" alt="Scan to Pay">
+      <button class="button" onclick="proceedPayment()">Proceed to Payment</button>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <p>Join our Discord for support and inquiries: <br>
+    <a href="https://discord.gg/UYXBDvfPEM" target="_blank">https://discord.gg/UYXBDvfPEM</a></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Demon Hosting. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
