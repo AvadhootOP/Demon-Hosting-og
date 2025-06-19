@@ -59,46 +59,146 @@
       margin: auto;
       padding: 3rem 2rem;
     }
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+      transition: transform 0.4s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
+    }
+    .button {
+      background-color: #ffcc00;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      color: black;
+      position: relative;
+      overflow: hidden;
+    }
+    .button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 150%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: skewX(-45deg);
+      z-index: 0;
+      animation: shimmer 2s infinite;
+    }
+    @keyframes shimmer {
+      0% { left: -75%; }
+      100% { left: 125%; }
+    }
+    #checkout {
+      background: #121212;
+      text-align: center;
+      border-radius: 15px;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo-final.jpg" alt="Demon Hosting Logo">
-    <h1>Demon Hosting</h1>
-    <p>Fast. Secure. Affordable.</p>
-    <nav>
-      <a href="#plans">Plans</a>
-      <a href="#checkout">Payment</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-  <section id="plans">
+
+<header>
+  <img src="logo-final.jpg" alt="Demon Hosting Logo">
+  <h1>Demon Hosting</h1>
+  <p>Fast. Secure. Affordable.</p>
+  <nav>
+    <a href="#plans">Plans</a>
+    <a href="#checkout">Payment</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="plans">
   <h2>Choose Your Minecraft Hosting Plan</h2>
-  <div class="plans" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-    <div class="card"><h3>Starter Plan</h3><p>4 GB RAM<br>20 GB Disk<br>CPU: 100%<br>₹180/month</p><a class="button" onclick="selectPlan('Starter Plan', 180)">Buy Now</a></div>
-    <div class="card"><h3>Basic Plan</h3><p>6 GB RAM<br>30 GB Disk<br>CPU: 200%<br>₹280/month</p><a class="button" onclick="selectPlan('Basic Plan', 280)">Buy Now</a></div>
-    <div class="card"><h3>Standard Plan</h3><p>8 GB RAM<br>40 GB Disk<br>CPU: 300%<br>₹450/month</p><a class="button" onclick="selectPlan('Standard Plan', 450)">Buy Now</a></div>
-    <div class="card"><h3>Pro Plan</h3><p>16 GB RAM<br>60 GB Disk<br>CPU: 500%<br>₹1000/month</p><a class="button" onclick="selectPlan('Pro Plan', 1000)">Buy Now</a></div>
-    <div class="card"><h3>Elite Plan</h3><p>24 GB RAM<br>80 GB Disk<br>CPU: 700%<br>₹1500/month</p><a class="button" onclick="selectPlan('Elite Plan', 1500)">Buy Now</a></div>
-    <div class="card"><h3>Ultra Plan</h3><p>32 GB RAM<br>100 GB Disk<br>CPU: 1000%<br>₹2000/month</p><a class="button" onclick="selectPlan('Ultra Plan', 2000)">Buy Now</a></div>
+  <div class="plans">
+    <div class="card"><h3>Starter Plan</h3><p>4 GB RAM<br>20 GB Disk<br>CPU: 100%<br>₹180/month</p><button class="button" onclick="selectPlan('Starter Plan', 180)">Buy Now</button></div>
+    <div class="card"><h3>Basic Plan</h3><p>6 GB RAM<br>30 GB Disk<br>CPU: 200%<br>₹280/month</p><button class="button" onclick="selectPlan('Basic Plan', 280)">Buy Now</button></div>
+    <div class="card"><h3>Standard Plan</h3><p>8 GB RAM<br>40 GB Disk<br>CPU: 300%<br>₹450/month</p><button class="button" onclick="selectPlan('Standard Plan', 450)">Buy Now</button></div>
+    <div class="card"><h3>Pro Plan</h3><p>16 GB RAM<br>60 GB Disk<br>CPU: 500%<br>₹1000/month</p><button class="button" onclick="selectPlan('Pro Plan', 1000)">Buy Now</button></div>
+    <div class="card"><h3>Elite Plan</h3><p>24 GB RAM<br>80 GB Disk<br>CPU: 700%<br>₹1500/month</p><button class="button" onclick="selectPlan('Elite Plan', 1500)">Buy Now</button></div>
+    <div class="card"><h3>Ultra Plan</h3><p>32 GB RAM<br>100 GB Disk<br>CPU: 1000%<br>₹2000/month</p><button class="button" onclick="selectPlan('Ultra Plan', 2000)">Buy Now</button></div>
   </div>
-  </section>
-  <section id="checkout" class="checkout" style="text-align:center; background:#121212; padding:2rem; border-radius:15px; margin-top:2rem;">
+</section>
+
+<section id="checkout">
   <h2>Checkout</h2>
   <p>Selected Plan: <strong id="plan-name">None</strong></p>
   <p>Total: ₹<strong id="amount">0</strong></p>
   <img src="qr-final.png" alt="Scan to Pay" style="width:180px; margin:20px auto; border-radius:10px;" />
-  <p>Pay using UPI ID: <strong>avadhutrairikar@fam</strong></p>
+  <p>Pay to UPI ID: <strong>avadhutrairikar@fam</strong></p>
   <button class="button" onclick="proceedPayment()">Proceed to Payment</button>
-  </section>
-  <section id="contact">
+</section>
+
+<section id="contact">
   <h2>Contact Us</h2>
   <p>Join our Discord: <a href="https://discord.gg/UYXBDvfPEM" style="color:#ffcc00;">https://discord.gg/UYXBDvfPEM</a></p>
 </section>
 
+<section id="terms" style="background:#1a1a1a; padding:2rem; margin-top:3rem; border-radius:10px;">
+  <h2>Terms & Conditions</h2>
+  <p>By using Demon Hosting, you agree to our policies. We reserve the right to terminate services in case of abuse. No refunds once service is activated.</p>
+</section>
+
 <footer>
-  <p>&copy; 2025 Demon Hosting. All rights reserved.</p>
+  <p style="text-align:center; padding:20px;">&copy; 2025 Demon Hosting. All rights reserved.</p>
 </footer>
+
+<!-- Fog and Lightning -->
+<style>
+  .animated-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at center, #0e0e0e 0%, #050505 100%);
+    overflow: hidden;
+  }
+  .fog {
+    position: absolute;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    background: url('https://i.ibb.co/YfMM0S6/fog.png') repeat;
+    animation: fogMove 80s linear infinite;
+    opacity: 0.07;
+  }
+  @keyframes fogMove {
+    0% { transform: translate3d(-50%, 0, 0); }
+    100% { transform: translate3d(0%, 0, 0); }
+  }
+  .lightning {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    mix-blend-mode: overlay;
+    opacity: 0;
+    pointer-events: none;
+  }
+  @keyframes lightningFlash {
+    0%, 100% { opacity: 0; }
+    10% { opacity: 0.7; }
+    20% { opacity: 0; }
+  }
+</style>
+<div class="animated-bg">
+  <div class="fog"></div>
+  <div class="lightning" id="lightning"></div>
+</div>
 
 <script>
   function selectPlan(name, amount) {
@@ -115,130 +215,6 @@
       body: JSON.stringify({ content: `💰 New Order: ${plan} for ₹${amount}` })
     });
   }
-</script>
-<style>
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Animated section entry */
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-section {
-  animation: slideUp 1s ease-out both;
-}
-
-/* Plan cards zoom-in on hover */
-.card {
-  transition: transform 0.4s ease, box-shadow 0.3s ease;
-}
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 20px rgba(255, 204, 0, 0.4);
-}
-
-/* Button glow effect */
-.button {
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-.button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 150%;
-  height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
-  transform: skewX(-45deg);
-  z-index: 0;
-  animation: shimmer 2s infinite;
-}
-@keyframes shimmer {
-  0% { left: -75%; }
-  100% { left: 125%; }
-}
-
-/* QR shake animation when visible */
-.qr {
-  animation: popIn 1s ease forwards;
-}
-@keyframes popIn {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
-}
-</style>
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const cards = document.querySelectorAll('.card');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = 'slideUp 0.8s ease-out both';
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  cards.forEach(card => {
-    card.style.opacity = 0;
-    observer.observe(card);
-  });
-});
-</script>
-<!-- 🌫️ Fog and ⚡ Lightning Background -->
-<style>
-  .animated-bg {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    z-index: -1;
-    background: radial-gradient(circle at center, #0e0e0e 0%, #050505 100%);
-    overflow: hidden;
-  }
-
-  .fog {
-    position: absolute;
-    top: 0;
-    width: 200%;
-    height: 200%;
-    background: url('https://i.ibb.co/YfMM0S6/fog.png') repeat;
-    animation: fogMove 80s linear infinite;
-    opacity: 0.07;
-  }
-
-  @keyframes fogMove {
-    0% { transform: translate3d(-50%, 0, 0); }
-    100% { transform: translate3d(0%, 0, 0); }
-  }
-
-  .lightning {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(255, 255, 255, 0.08);
-    mix-blend-mode: overlay;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  @keyframes lightningFlash {
-    0%, 100% { opacity: 0; }
-    10% { opacity: 0.7; }
-    20% { opacity: 0; }
-  }
-</style>
-
-<div class="animated-bg">
-  <div class="fog"></div>
-  <div class="lightning" id="lightning"></div>
-</div>
-
-<script>
   function lightningEffect() {
     const lightning = document.getElementById("lightning");
     lightning.style.animation = 'lightningFlash 1s linear';
@@ -246,12 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
       lightning.style.animation = 'none';
     }, 1000);
   }
-
   setInterval(() => {
     if (Math.random() < 0.3) lightningEffect();
   }, 4000);
 </script>
-<section id="terms" style="background: #1a1a1a; padding: 2rem; margin-top: 3rem; border-radius: 10px;">
-  <h2>Terms & Conditions</h2>
-  <p>By using Demon Hosting, you agree to our policies regarding usage, refunds, and server content. We reserve the right to terminate services in case of abuse, illegal use, or non-payment. No refunds once service is activated.</p>
-</section>
+
+</body>
+</html>
