@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Demon Hosting - Minecraft Hosting</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -11,6 +11,7 @@
       font-family: 'Roboto', sans-serif;
       background-color: #0e0e0e;
       color: #fff;
+      scroll-behavior: smooth;
     }
     header {
       background: #1a1a1a;
@@ -20,6 +21,7 @@
     }
     header img {
       width: 100px;
+      animation: fadeInDown 1s ease;
     }
     header h1 {
       font-size: 2.5rem;
@@ -59,6 +61,7 @@
       max-width: 1200px;
       margin: auto;
       padding: 40px 20px;
+      animation: fadeInUp 0.8s ease;
     }
     .services, .plans {
       display: grid;
@@ -79,19 +82,6 @@
       margin-top: 0;
       color: #ffcc00;
     }
-    .checkout {
-      text-align: center;
-    }
-    .qr {
-      max-width: 200px;
-      margin: 20px auto;
-    }
-    footer {
-      background: #111;
-      text-align: center;
-      padding: 20px;
-      color: #777;
-    }
     .button {
       display: inline-block;
       padding: 10px 20px;
@@ -101,39 +91,66 @@
       text-decoration: none;
       border-radius: 5px;
       font-weight: bold;
+      transition: 0.3s;
     }
-    #upi-section {
-      background: #1c1c1c;
+    .button:hover {
+      background: #ffd633;
+      transform: scale(1.05);
+    }
+    footer {
+      background: #111;
+      text-align: center;
       padding: 20px;
-      margin-top: 20px;
-      border-radius: 10px;
+      color: #777;
     }
-    #upi-section code {
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #1c1c1c;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      animation: fadeInUp 0.5s ease;
+    }
+    .modal-content img {
+      max-width: 100%;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    .close {
+      position: absolute;
+      top: 20px; right: 30px;
+      font-size: 30px;
+      color: #fff;
+      cursor: pointer;
+    }
+    code {
       background: #333;
       padding: 5px 10px;
       border-radius: 5px;
       color: #ffcc00;
     }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
-  <script>
-    function selectPlan(price, planName) {
-      document.getElementById('amount').innerText = price;
-      document.getElementById('upi-plan-name').innerText = planName;
-    }
-    async function notifyDiscord(planName, amount) {
-      await fetch('https://discord.com/api/webhooks/1384076241912463443/U80MH2WjPXZG32uJ31axtrNMa0h_kIljdcbzaYH2JlZ0n4q3g-_NsTJ-_EFS6X2pOghC', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ content: `✅ New Purchase Request: ${planName} for ₹${amount}` })
-      });
-    }
-    function proceedPayment() {
-      const planName = document.getElementById('upi-plan-name').innerText;
-      const amount = document.getElementById('amount').innerText;
-      alert(`Please pay ₹${amount} via UPI: avadhutrairikar@fam`);
-      notifyDiscord(planName, amount);
-    }
-  </script>
 </head>
 <body>
   <header>
@@ -141,92 +158,88 @@
     <h1>Demon Hosting</h1>
     <p>Fast. Secure. Affordable.</p>
     <nav>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#plans">View Plans</a>
-      <a href="#contact">Contact</a>
+      <a href=\"#about\">About</a>
+      <a href=\"#services\">Services</a>
+      <a href=\"#plans\">View Plans</a>
+      <a href=\"#contact\">Contact</a>
     </nav>
   </header>
 
-  <section id="about">
+  <section id=\"about\">
     <h2>About Us</h2>
     <p>Welcome to Demon Hosting! We provide blazing fast and affordable Minecraft and VPS hosting solutions. Whether you're running a server for friends or building a large community, we’ve got your back with top-notch uptime and performance.</p>
   </section>
 
-  <section id="services">
+  <section id=\"services\">
     <h2>Our Services</h2>
-    <div class="services">
-      <div class="card">
+    <div class=\"services\">
+      <div class=\"card\">
         <h3>Minecraft Hosting</h3>
         <p>Lag-free, high-performance Minecraft servers tailored to your needs.</p>
       </div>
-      <div class="card">
+      <div class=\"card\">
         <h3>VPS Hosting</h3>
         <p>Powerful VPS plans with root access and full control.</p>
       </div>
-      <div class="card">
+      <div class=\"card\">
         <h3>More Coming Soon!</h3>
         <p>We are always expanding and improving to offer you more.</p>
       </div>
     </div>
   </section>
 
-  <section id="plans">
+  <section id=\"plans\">
     <h2>Choose Your Plan</h2>
-    <div class="plans">
-      <div class="card">
-        <h3>Starter Plan</h3>
-        <p>RAM: 4 GB<br>Disk: 20 GB<br>CPU: 100%<br>Price: ₹180/month</p>
-        <a class="button" href="#checkout" onclick="selectPlan(180, 'Starter Plan')">Buy Now</a>
-      </div>
-      <div class="card">
-        <h3>Basic Plan</h3>
-        <p>RAM: 6 GB<br>Disk: 30 GB<br>CPU: 200%<br>Price: ₹280/month</p>
-        <a class="button" href="#checkout" onclick="selectPlan(280, 'Basic Plan')">Buy Now</a>
-      </div>
-      <div class="card">
-        <h3>Standard Plan</h3>
-        <p>RAM: 8 GB<br>Disk: 40 GB<br>CPU: 300%<br>Price: ₹450/month</p>
-        <a class="button" href="#checkout" onclick="selectPlan(450, 'Standard Plan')">Buy Now</a>
-      </div>
-      <div class="card">
-        <h3>Pro Plan</h3>
-        <p>RAM: 16 GB<br>Disk: 60 GB<br>CPU: 500%<br>Price: ₹1000/month</p>
-        <a class="button" href="#checkout" onclick="selectPlan(1000, 'Pro Plan')">Buy Now</a>
-      </div>
-      <div class="card">
-        <h3>Elite Plan</h3>
-        <p>RAM: 24 GB<br>Disk: 80 GB<br>CPU: 700%<br>Price: ₹1500/month</p>
-        <a class="button" href="#checkout" onclick="selectPlan(1500, 'Elite Plan')">Buy Now</a>
-      </div>
-      <div class="card">
+    <div class=\"plans\">
+      <!-- Repeat for each plan -->
+      <div class=\"card\">
         <h3>Ultra Plan</h3>
         <p>RAM: 32 GB<br>Disk: 100 GB<br>CPU: 1000%<br>Price: ₹2000/month</p>
-        <a class="button" href="#checkout" onclick="selectPlan(2000, 'Ultra Plan')">Buy Now</a>
+        <a class=\"button\" onclick=\"openModal('Ultra Plan', 2000)\">Buy Now</a>
       </div>
+      <!-- Add more plans as needed, similar format -->
     </div>
   </section>
 
-  <section id="checkout" class="checkout">
-    <h2>Checkout</h2>
-    <p>Selected Plan: <strong id="upi-plan-name">None</strong></p>
-    <p>Total: <strong>₹<span id="amount">0</span></strong></p>
-    <div id="upi-section">
-      <p>Scan & Pay UPI QR (or use UPI ID: <code>avadhutrairikar@fam</code>)</p>
-      <img class="qr" src="your-qr-code.png" alt="Scan to Pay">
-      <button class="button" onclick="proceedPayment()">Proceed to Payment</button>
-    </div>
-  </section>
-
-  <section id="contact">
+  <section id=\"contact\">
     <h2>Contact Us</h2>
     <p>Join our Discord for support and inquiries: <br>
-    <a href="https://discord.gg/UYXBDvfPEM" target="_blank">https://discord.gg/UYXBDvfPEM</a></p>
+      <a href=\"https://discord.gg/UYXBDvfPEM\" target=\"_blank\">https://discord.gg/UYXBDvfPEM</a></p>
   </section>
 
   <footer>
     <p>&copy; 2025 Demon Hosting. All rights reserved.</p>
   </footer>
 
+  <!-- Modal -->
+  <div id=\"paymentModal\" class=\"modal\">
+    <div class=\"modal-content\">
+      <span class=\"close\" onclick=\"closeModal()\">&times;</span>
+      <h2>Complete Your Payment</h2>
+      <p>Selected Plan: <strong id=\"selectedPlan\"></strong></p>
+      <p>Total: ₹<strong id=\"selectedAmount\"></strong></p>
+      <p>UPI ID: <code>avadhutrairikar@fam</code></p>
+      <img src=\"upi-qr-code.png\" alt=\"UPI QR Code\">
+      <p>Scan the code or use UPI ID to pay.</p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(plan, amount) {
+      document.getElementById(\"selectedPlan\").innerText = plan;
+      document.getElementById(\"selectedAmount\").innerText = amount;
+      document.getElementById(\"paymentModal\").style.display = \"flex\";
+
+      fetch(\"https://discord.com/api/webhooks/1384076241912463443/U80MH2WjPXZG32uJ31axtrNMa0h_kIljdcbzaYH2JlZ0n4q3g-_NsTJ-_EFS6X2pOghC\", {
+        method: \"POST\",
+        headers: { \"Content-Type\": \"application/json\" },
+        body: JSON.stringify({ content: `🧾 New order: ${plan} - ₹${amount}` })
+      });
+    }
+
+    function closeModal() {
+      document.getElementById(\"paymentModal\").style.display = \"none\";
+    }
+  </script>
 </body>
 </html>
