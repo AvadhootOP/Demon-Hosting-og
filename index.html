@@ -226,6 +226,23 @@
     if (Math.random() < 0.3) lightningEffect();
   }, 4000);
 </script>
+<head>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background: url('fog_lightning_animated.gif') repeat;
+      background-size: cover;
+      animation: fogMove 30s linear infinite;
+      color: #fff;
+    }
+
+    @keyframes fogMove {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 0; }
+    }
+  </style>
+</head>
 
 </body>
 </html>
